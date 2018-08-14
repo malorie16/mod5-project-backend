@@ -12,3 +12,6 @@ User.create(email: 'pablo.moreira@flatironschool.com', name: 'Pablo Moreira')
 User.create(email: 'patjab@gmail.com', name: 'Patrick Abejar')
 
 Pano.create(caption: 'cool pano!', user_id: 1)
+Pano.create(caption: 'AMAZING', user_id: 2)
+Pano.create(caption: 'slaaaay', user_id: 3)
+Pano.create(caption: 'wish I was there', user_id: 4)

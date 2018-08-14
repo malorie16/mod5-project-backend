@@ -3,23 +3,21 @@ class PanosController < ApplicationController
 
   def index
     @panos = Pano.all
-    render json: @panos
+    render json: @panos.map(&:formatted_json)
   end
 
   def show
-    render json: @pano.get_image, status: :accepted
+    render json: @pano.formatted_json, status: :accepted
   end
 
   def create
-    @pano = Pano.find_or_create_by(id: params[:id])
-    @pano.image.attach(params[:image])
+    @pano = Pano.new(pano_params)
 
-    @pano.save
-
+    if @pano.save
       render json: @pano, status: :created
-    # else
-    #   render json: @pano.errors, status: :unprocessable_entity
-    # end
+    else
+      render json: @pano.errors, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -32,7 +30,7 @@ private
     @pano = Pano.find(params[:id])
   end
 
-  # def pano_params
-  #   params.require(:pano).permit(:caption, :image, :user_id)
-  # end
+  def pano_params
+    params.require(:pano).permit(:caption, :pano_url, :user_id)
+  end
 end
