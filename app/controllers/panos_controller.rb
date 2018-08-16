@@ -14,7 +14,7 @@ class PanosController < ApplicationController
     @pano = Pano.new(pano_params)
 
     if @pano.save
-      render json: @pano, status: :created
+      render json: @pano.formatted_json, status: :created
     else
       render json: @pano.errors, status: :unprocessable_entity
     end

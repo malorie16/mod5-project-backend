@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
 
   def current_user
     user = User.find_by(id: decoded_token)
-    {user: user, panos: user.panos}
+    
   end
 
   def token

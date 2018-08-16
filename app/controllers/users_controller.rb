@@ -2,7 +2,8 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    render json: @users
+    render = @users.map{|user| {user: user, panos: user.panos}}
+    render json: render
   end
 
 # GET /users/1
@@ -13,11 +14,11 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    @user = User.find_or_create_by(email: params[:email])
+    @user = User.new(user_params)
 
     if @user.valid?
       @user.save
-      render json: @user, status: :created
+      render json: { token: issue_token({ id: @user.id }) }
     else
       render json: @user.errors, status: :unprocessable_entity
     end
