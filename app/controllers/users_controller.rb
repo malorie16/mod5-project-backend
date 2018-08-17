@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    render = @users.map{|user| {user: user, panos: user.panos}}
+    render = @users.map{|user| {user: user, panos: user.panos, comments: user.panos.map(&:comments).flatten, likes: user.panos.map(&:likes).flatten}}
     render json: render
   end
 

@@ -1,8 +1,12 @@
 class CommentsController < ApplicationController
-  before_action :find_comment, only: [:update]
+  before_action :find_comment, only: [:show, :update]
+
+  def show
+    render json: @comment, status: :accepted
+  end
 
   def create
-    @comment = Comment.find_or_create_by(pano_id: params[:pano:id])
+    @comment = Comment.new(comment_params)
 
     if @comment.save
       render json: @comment, status: :created
@@ -27,6 +31,6 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:pano_id)
+    params.require(:comment).permit(:pano_id, :comment)
   end
 end

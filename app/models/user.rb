@@ -14,4 +14,5 @@ class User < ApplicationRecord
   def formatted_json
     {user: self, panos: self.panos}
   end
+
 end
