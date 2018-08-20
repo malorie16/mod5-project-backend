@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :comments, :through => :panos
 
   def formatted_json
-    {user: self, panos: self.panos}
+    {user: self, panos: self.panos.map(&:formatted_json)}
   end
 
 end

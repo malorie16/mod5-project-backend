@@ -11,7 +11,7 @@ class AuthController < ApplicationController
   end
 
   def get_current_user
-    render json: {user: current_user, panos: current_user.panos}
+    render json: current_user.formatted_json
   end
 
 end

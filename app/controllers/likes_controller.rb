@@ -1,8 +1,12 @@
 class LikesController < ApplicationController
-  before_action :find_like, only: [:update]
+  before_action :find_like, only: [:show, :update]
+
+  def show
+    render json: @like, status: :accepted
+  end
 
   def create
-    @like = Like.find_or_create_by(pano_id: params[:pano:id])
+    @like = Like.new(like_params)
 
     if @like.save
       render json: @like, status: :created
@@ -27,7 +31,7 @@ class LikesController < ApplicationController
   end
 
   def like_params
-    params.require(:like).permit(:pano_id)
+    params.require(:like).permit(:pano_id, :likes)
   end
 
 

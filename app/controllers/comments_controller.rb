@@ -1,8 +1,13 @@
 class CommentsController < ApplicationController
   before_action :find_comment, only: [:show, :update]
 
+  def index
+    @comments = Comment.all
+    render json: @comments.map(&:formatted_json)
+  end
+
   def show
-    render json: @comment, status: :accepted
+    render json: @comment.pano.comments, status: :accepted
   end
 
   def create
